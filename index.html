@@ -16,20 +16,9 @@
             background-color: #f4f4f9;
         }
         h1 {
-            font-family: 'Roboto', sans-serif;
-            font-size: 2.5em;
-            color: #000700;
-            text-shadow: gold 1px 1px 2px;
             text-align: center;
             color: #333;
             margin-bottom: 20px;
-        }
-        h1:hover {
-            color: gold;
-            text-shadow: #000700;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-            transition: color 0.3s, text-shadow 0.3s;
-            
         }
         label {
             font-size: 18px;
@@ -112,9 +101,11 @@
 <body>
     <h1>Multiplication Table Generator</h1>
     <label for="numberInput">Enter a number:</label>
-    <input class="myDIV" type="number" id="numberInput" min="1" required>
-    <button onclick="generateTable()">Generate Table</button>
-    <button class="reset" onclick="window.location.reload()">Reset</button>
+    <form method="POST" action="">
+        <input class="myDIV" type="number" id="numberInput" name="numberInput" min="1" required>
+        <button type="submit">Generate Table</button>
+        <button class="reset" type="button" onclick="window.location.reload()">Reset</button>
+    </form>
     <div class="hide">Enter The Number You Want to get a Table</div>
     <table id="multiplicationTable">
         <thead>
@@ -124,22 +115,35 @@
             </tr>
         </thead>
         <tbody>
-            <!-- Results will be inserted here -->
+         
         </tbody>
     </table>
+    <div id="deviceInfo" style="margin-top: 20px; font-size: 18px; color: #333;"></div>
     <script>
-        function generateTable() {
-            const number = document.getElementById("numberInput").value;
-            const tableBody = document.getElementById("multiplicationTable").getElementsByTagName("tbody")[0];
-            tableBody.innerHTML = ""; // Clear previous results
-            for (let i = 1; i <= 10; i++) {
-                const row = tableBody.insertRow();
-                const cell1 = row.insertCell(0);
-                const cell2 = row.insertCell(1);
-                cell1.textContent = `${number} x ${i}`;
-                cell2.textContent = number * i;
+        // Get the user's device name
+        function getDeviceName() {
+            const userAgent = navigator.userAgent; // Get user agent string
+            const devices = [
+                { name: 'Windows', regex: /Windows/ },
+                { name: 'Macintosh', regex: /Macintosh/ },
+                { name: 'Linux', regex: /Linux/ },
+                { name: 'Android', regex: /Android/ },
+                { name: 'iPhone', regex: /iPhone/ },
+                { name: 'iPad', regex: /iPad/ },
+            ];
+            
+            // Check user agent against the list of devices
+            for (const device of devices) {
+                if (device.regex.test(userAgent)) {
+                    return device.name; // Return the matched device name
+                }
             }
+            
+            return 'Unknown'; // Return 'Unknown' if no match is found
         }
+        // Example usage
+        const deviceName = getDeviceName();
+        document.getElementById("deviceInfo").textContent = `Your device name is: ${deviceName}`;
     </script>
 </body>
-</html> 
+</html>
