@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplication Table</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f4f4f9;
+        }
+        h1 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 2.5em;
+            color: #000700;
+            text-shadow: gold 1px 1px 2px;
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        h1:hover {
+            color: gold;
+            text-shadow: #000700;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            transition: color 0.3s, text-shadow 0.3s;
+            
+        }
+        label {
+            font-size: 18px;
+            margin-right: 10px;
+        }
+        input,
+        button {
+            width: 100%;
+            max-width: 300px; /* Limit the maximum width */
+            border-radius: 25px;
+            padding: 10px;
+            font-size: 16px;
+            margin: 10px 0; /* Add some margin for spacing */
+            border: 1px solid #ccc;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        input:focus {
+            border-color: #4CAF50;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+            outline: none;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button.reset {
+            background-color: #f44336;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        button.reset:hover {
+            background-color: #d32f2f;
+        }
+        table {
+            border-collapse: collapse;
+            margin-top: 20px;
+            width: 100%;
+            max-width: 500px; /* Limit the maximum width */
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background-color: white;
+        }
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        th {
+            color: white;
+            background-color: #4CAF50;
+        }
+        .hide {
+            display: none;
+        }
+        .myDIV:hover + .hide {
+            display: block;
+            color: red;
+        }
+        /* Responsive Styles */
+        @media (max-width: 600px) {
+            label {
+                display: block; /* Stack label above input */
+                margin-bottom: 5px; /* Add margin for spacing */
+            }
+            input,
+            button {
+                width: 90%; /* Use more width on smaller screens */
+            }
+            table {
+                font-size: 14px; /* Reduce font size for smaller screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Multiplication Table Generator</h1>
+    <label for="numberInput">Enter a number:</label>
+    <input class="myDIV" type="number" id="numberInput" min="1" required>
+    <button onclick="generateTable()">Generate Table</button>
+    <button class="reset" onclick="window.location.reload()">Reset</button>
+    <div class="hide">Enter The Number You Want to get a Table</div>
+    <table id="multiplicationTable">
+        <thead>
+            <tr>
+                <th>Multiplier</th>
+                <th>Result</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Results will be inserted here -->
+        </tbody>
+    </table>
+    <script>
+        function generateTable() {
+            const number = document.getElementById("numberInput").value;
+            const tableBody = document.getElementById("multiplicationTable").getElementsByTagName("tbody")[0];
+            tableBody.innerHTML = ""; // Clear previous results
+            for (let i = 1; i <= 10; i++) {
+                const row = tableBody.insertRow();
+                const cell1 = row.insertCell(0);
+                const cell2 = row.insertCell(1);
+                cell1.textContent = `${number} x ${i}`;
+                cell2.textContent = number * i;
+            }
+        }
+    </script>
+</body>
+</html> 
